@@ -1,0 +1,19 @@
+{
+  "name": "bookshelf-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@hapi/hapi": "^20.1.5",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "nodemon": "^2.0.12"
+  }
+}
