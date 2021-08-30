@@ -33,12 +33,12 @@ const addBookHandler = (request, h) => {
     updatedAt,
   };
 
-  if (name.length === 0) {
+  if (typeof name === 'undefined') {
     const response = h.response({
       status: 'fail',
       message: 'Gagal menambahkan buku. Mohon isi nama buku',
     });
-    response.code = 400;
+    response.code(400);
     return response;
   }
 
@@ -47,7 +47,7 @@ const addBookHandler = (request, h) => {
       status: 'fail',
       message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
     });
-    response.code = 400;
+    response.code(400);
     return response;
   }
 
@@ -62,7 +62,7 @@ const addBookHandler = (request, h) => {
         bookId: id,
       },
     });
-    response.code = 201;
+    response.code(201);
     return response;
   }
 
@@ -70,18 +70,19 @@ const addBookHandler = (request, h) => {
     status: 'fail',
     message: 'Buku gagal ditambahkan',
   });
-  response.code = 404;
+  response.code(404);
   return response;
 };
 
 const getAllBooksHandler = (request, h) => {
+  const data = books.map(({id, name, publisher }) => ({id, name, publisher}));
   const response = h.response({
     status: 'success',
     data: {
-      books: books,
+      books: data,
     },
   })
-  response.code = 200;
+  response.code(200);
   return response;
 };
 
@@ -94,10 +95,10 @@ const getBookByIdHandler = (request, h) => {
     const response = h.response({
       status: 'success',
       data: {
-        book,
+        book: book,
       }
     });
-    response.code = 200;
+    response.code(200);
     return response;
   }
 
@@ -105,7 +106,7 @@ const getBookByIdHandler = (request, h) => {
     status: 'fail',
     message: 'Buku tidak ditemukan',
   });
-  response.code = 404;
+  response.code(404);
   return response;
 };
 
@@ -122,12 +123,12 @@ const editBookByIdHandler = (request, h) => {
     reading,
   } = request.payload;
 
-  if (name.length === 0) {
+  if (typeof name === 'undefined') {
     const response = h.response({
       status: 'fail',
       message: 'Gagal memperbarui buku. Mohon isi nama buku',
     });
-    response.code = 400;
+    response.code(400);
     return response;
   }
 
@@ -136,7 +137,7 @@ const editBookByIdHandler = (request, h) => {
       status: 'fail',
       message: 'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
     });
-    response.code = 400;
+    response.code(400);
     return response;
   }
 
@@ -162,7 +163,7 @@ const editBookByIdHandler = (request, h) => {
       status: 'success',
       message: 'Buku berhasil diperbarui'
     });
-    response.code = 200;
+    response.code(200);
     return response;
   }
 
@@ -170,7 +171,7 @@ const editBookByIdHandler = (request, h) => {
     status: 'fail',
     message: 'Gagal memperbarui buku. Id tidak ditemukan'
   });
-  response.code = 404;
+  response.code(404);
   return response;
 };
 
@@ -185,7 +186,7 @@ const deleteBookByIdHandler = (request, h) => {
       'status': 'success',
       'message': 'Buku berhasil dihapus'
     });
-    response.code = 200;
+    response.code(200);
     return response;
   }
 
@@ -193,7 +194,7 @@ const deleteBookByIdHandler = (request, h) => {
     'status': 'fail',
     'message': 'Buku gagal dihapus. Buku tidak ditemukan',
   });
-  response.code = 404;
+  response.code(404);
   return response;
 }
 
