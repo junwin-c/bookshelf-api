@@ -1,6 +1,7 @@
 const {nanoid} = require('nanoid');
 const books = require('./books');
 
+/* Add Book Handler */
 const addBookHandler = (request, h) => {
   const {
     name,
@@ -74,6 +75,7 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+/* Get All Books Handler */
 const getAllBooksHandler = (request, h) => {
   const {reading, finished, name} = request.query;
   let data;
@@ -96,7 +98,7 @@ const getAllBooksHandler = (request, h) => {
   } else {
     data = data.map(({id, name, publisher }) => ({id, name, publisher}));
   }
-  
+
   const response = h.response({
     status: 'success',
     data: {
@@ -107,6 +109,7 @@ const getAllBooksHandler = (request, h) => {
   return response;
 };
 
+/* Get Book By Id Handler */
 const getBookByIdHandler = (request, h) => {
   const {id} = request.params;
 
@@ -131,6 +134,7 @@ const getBookByIdHandler = (request, h) => {
   return response;
 };
 
+/* Edit Book By Id Handler */
 const editBookByIdHandler = (request, h) => {
   const { id } = request.params;
   const {
@@ -196,6 +200,7 @@ const editBookByIdHandler = (request, h) => {
   return response;
 };
 
+/* Delete Book By Id Handler */
 const deleteBookByIdHandler = (request, h) => {
   const {id} = request.params;
   const index = books.findIndex((book) => book.id === id);
